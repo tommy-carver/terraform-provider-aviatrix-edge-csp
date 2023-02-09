@@ -99,7 +99,7 @@ func (c *Client) DeleteFQDN(fqdn *FQDN) error {
 	return c.PostAPI(form["action"], form, BasicCheck)
 }
 
-//change state to 'enabled' or 'disabled'
+// change state to 'enabled' or 'disabled'
 func (c *Client) UpdateFQDNStatus(fqdn *FQDN) error {
 	form := map[string]string{
 		"CID":      c.CID,
@@ -111,7 +111,7 @@ func (c *Client) UpdateFQDNStatus(fqdn *FQDN) error {
 	return c.PostAPI(form["action"], form, BasicCheck)
 }
 
-//Change default mode to 'white' or 'black'
+// Change default mode to 'white' or 'black'
 func (c *Client) UpdateFQDNMode(fqdn *FQDN) error {
 	form := map[string]string{
 		"CID":      c.CID,
