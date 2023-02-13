@@ -28,6 +28,7 @@ type EdgePlatform struct {
 	MgmtInterfaces string                   `json:"mgmt_ifnames"`
 	LANIP          string                   `json:"lan_ip"`
 	InterfaceList  []*EdgePlatformInterface `json:"interfaces"`
+	GWSize         string                   `json:"gw_size"`
 }
 
 type EdgePlatformInterface struct {

@@ -9,6 +9,7 @@ import (
 
 	"github.com/AviatrixSystems/terraform-provider-aviatrix/v3/goaviatrix"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceAviatrixEdgePlatform() *schema.Resource {
@@ -92,6 +93,12 @@ func resourceAviatrixEdgePlatform() *schema.Resource {
 				Required:    true,
 				Description: "Use dhcp for managemnet config.",
 			},
+			"gw_size": {
+				Type:         schema.TypeString,
+				Required:     true,
+				ValidateFunc: validation.StringInSlice([]string{"small", "medium", "large", "x-large"}, false),
+				Description:  "GW Instance size (CPU and Memory)",
+			},
 			"interfaces": {
 				Type:             schema.TypeList,
 				Required:         true,
@@ -168,6 +175,7 @@ func marshalAvxEdgeCSPInput(d *schema.ResourceData) *goaviatrix.EdgePlatform {
 		MgmtInterfaces: strings.Join(getStringList(d, "mgmt_ifnames"), ","),
 		LANIP:          d.Get("lan_ip").(string),
 		Dhcp:           d.Get("dhcp").(bool),
+		GWSize:         d.Get("gw_size").(string),
 	}
 
 	interfaces := d.Get("interfaces").([]interface{})
